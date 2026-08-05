@@ -17,8 +17,21 @@ from datetime import timedelta
 # Functions
 
 def collect_sysdata():
-    uptime_seconds = time.time() - psutil.boot_time()
-    uptime = str(timedelta(seconds=uptime_seconds)).split(".")[0]
+    uptime_seconds = int(time.time() - psutil.boot_time())
+    days = uptime_seconds // 86400
+    hours = (uptime_seconds % 86400) // 3600
+    minutes = (uptime_seconds & 86400) // 60
+    seconds = uptime_seconds % 60
+
+    uptime = f"{days}d {hours}h {minutes}m {seconds}s"
+
+    
+
+
+
+
+
+
 
     cpu = psutil.cpu_percent(interval=1)
     cpucore = psutil.cpu_count()
