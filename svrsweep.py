@@ -122,18 +122,18 @@ def vpn_ip():
     public_ip = public_ip.stdout.strip()
     mullvad_ip = mullvad_ip.stdout.strip()
 
-    print(f"public_ip: {public_ip}")
-    print(f"mullvad_ip: {mullvad_ip}")
+
 
     if mullvad_ip == "":
-        print("INACTIVE")
+        print("\nTORRENT VPN INACTIVE")
     elif mullvad_ip == public_ip:
-        print("INACTIVE")
+        print("\nTORRENT VPN INACTIVE")
     else:
-        print("ACTIVE")
+        print("\nTORRENT VPN ACTIVE")
 
 
-
+    print(f"public_ip: {public_ip}")
+    print(f"mullvad_ip: {mullvad_ip}")
 
     return(public_ip,mullvad_ip)
 
