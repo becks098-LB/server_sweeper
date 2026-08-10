@@ -125,11 +125,11 @@ def vpn_ip():
 
 
     if mullvad_ip == "":
-        print("\nTORRENT VPN INACTIVE")
+        print("\nTORRENT VPN INACTIVE ❌")
     elif mullvad_ip == public_ip:
-        print("\nTORRENT VPN INACTIVE")
+        print("\nTORRENT VPN INACTIVE ❌")
     else:
-        print("\nTORRENT VPN ACTIVE")
+        print("\nTORRENT VPN ACTIVE ✅")
 
 
     print(f"public_ip: {public_ip}")
