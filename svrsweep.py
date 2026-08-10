@@ -94,6 +94,9 @@ def display_system_stats(sysdata):
 
 
 def check_vpn_status():
+    print("\n--------------------")
+    print("VPN Status (Torrent)")
+    print("--------------------")
     vpn_status = subprocess.run(["docker", "ps", "--filter", "name=qbittorrent-vpn", "--format", "Status: {{.Status}}"],
     capture_output=True,
     text=True)
@@ -123,9 +126,10 @@ def check_vpn_status():
 
 
 
-# Function calls
+# Function calls and program run
 
 sysdata = collect_sysdata()
 print_title()
 display_system_stats(sysdata)
+
 print(check_vpn_status().stdout)
