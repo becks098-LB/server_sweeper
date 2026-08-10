@@ -1,7 +1,7 @@
 
 #imports
 
-
+import subprocess
 import psutil
 import time
 from datetime import timedelta
@@ -93,6 +93,12 @@ def display_system_stats(sysdata):
     
 
 
+def check_vpn_status():
+    vpn_status = subprocess.run(["docker", "ps", "--filter", "name=qbittorrent-vpn", "--format", "Status: {{.Status}}"],
+    capture_output=True,
+    text=True)
+    return(vpn_status)
+
 
 
 
@@ -122,3 +128,4 @@ def display_system_stats(sysdata):
 sysdata = collect_sysdata()
 print_title()
 display_system_stats(sysdata)
+print(check_vpn_status().stdout)
