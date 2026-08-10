@@ -97,16 +97,45 @@ def check_vpn_status():
     print("\n--------------------")
     print("VPN Status (Torrent)")
     print("--------------------")
-    vpn_status = subprocess.run(["docker", "ps", "--filter", "name=qbittorrent-vpn", "--format", "Status: {{.Status}}"],
+    vpn_status = subprocess.run(["docker", "ps", "--filter", "name=qbittorrent-vpn", "--format", "VPN Status: {{.Status}}"],
     capture_output=True,
     text=True)
+   
+
+
+    
     return(vpn_status)
 
 
 
+def vpn_ip():
+
+    public_ip = subprocess.run(["curl", "https://api.ipify.org"],
+    capture_output=True,
+    text=True)
+
+    
+    mullvad_ip = subprocess.run(["docker", "exec", "qbittorrent-vpn", "wget", "-qO-","https://api.ipify.org"],
+    capture_output=True,
+    text=True)
+
+    public_ip = public_ip.stdout.strip()
+    mullvad_ip = mullvad_ip.stdout.strip()
+
+    print(f"public_ip: {public_ip}")
+    print(f"mullvad_ip: {mullvad_ip}")
+
+    if mullvad_ip == "":
+        print("INACTIVE")
+    elif mullvad_ip == public_ip:
+        print("INACTIVE")
+    else:
+        print("ACTIVE")
 
 
 
+
+    return(public_ip,mullvad_ip)
 
 
 
@@ -133,3 +162,4 @@ print_title()
 display_system_stats(sysdata)
 
 print(check_vpn_status().stdout)
+vpn_ip()
