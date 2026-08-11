@@ -103,6 +103,7 @@ def display_system_stats(sysdata):
     print("\n------------------")
     print("System information")
     print("------------------")
+    print("")
 
     print(f"CPU Usage: {sysdata['cpu']} %")
     print(f"CPU Cores: {sysdata['cpu_cores']}")
@@ -174,7 +175,12 @@ def vpn_ip():
 
 
 
-#def docker_overview():
+def docker_overview():
+    print("")
+    print("-------------")
+    print("Docker Status")
+    print("-------------")
+    print("")
 
 
 
@@ -205,6 +211,20 @@ sysdata = collect_sysdata()
 print_title()
 display_system_stats(sysdata)
 
+
 print(check_vpn_status().stdout)
 vpn_data = vpn_ip()
+
+
+docker_overview = docker_overview()
+
+
+
+
+
+
+
+
+
+
 status_update(sysdata, vpn_data)
