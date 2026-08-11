@@ -110,7 +110,7 @@ def display_system_stats(sysdata):
     print(f"RAM Usage: {sysdata['ram_percent']:.2f} %")
     print(f"RAM Available: {sysdata['ram_available']:.2f}/{sysdata['ram_total']:.2f} GB")
     print(f"Disk Usage: {sysdata['disk_percent']:.2f} %")
-    print(f"Disk Available: {sysdata['disk_available']:.2f}/{sysdata['disk_total']:.2f} GB")
+    print(f"Local Disk Available: {sysdata['disk_available']:.2f}/{sysdata['disk_total']:.2f} GB")
     #print(f"Network Data: {sysdata['network']}")
     print(f"Uptime: {sysdata['uptime']}")
 
@@ -127,7 +127,7 @@ def check_vpn_status():
     print("VPN Status (Torrent)")
     print("--------------------")
     print("                    ")
-    
+
     vpn_status = subprocess.run(["docker", "ps", "--filter", "name=qbittorrent-vpn", "--format", "VPN Status: {{.Status}}"],
     capture_output=True,
     text=True)
@@ -184,7 +184,12 @@ def docker_overview():
     print("")
 
 
-
+def pihole_overview():
+    print("")
+    print("-------------")
+    print("Adblocker Status")
+    print("-------------")
+    print("")
 
 
 
