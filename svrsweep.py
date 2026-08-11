@@ -42,6 +42,9 @@ def collect_sysdata():
     diskav = psutil.disk_usage("/").free
     disktot = psutil.disk_usage("/").total
     networkdat = psutil.net_io_counters()
+
+    diskavmnt1 = psutil.disk_usage("/mnt/storage").free
+    disktotmnt1 = psutil.disk_usage("/mnt/storage").total
     
     #temp = sensors_temperatures()
 
@@ -50,6 +53,9 @@ def collect_sysdata():
 
     diskavgb = diskav / 1000**3
     disktotgb = disktot /1000**3
+
+    diskavmnt1gb = diskavmnt1 / 1000**3
+    disktotmnt1gb = disktotmnt1 / 1000**3
 
 
     return {
@@ -62,7 +68,9 @@ def collect_sysdata():
         "disk_available": diskavgb,
         "disk_total": disktotgb,
         "network": networkdat,
-        "uptime": uptime
+        "uptime": uptime,
+        "mntdisk_available": diskavmnt1gb,
+        "mntdisk_total": disktotmnt1gb
     }
 
 
@@ -90,6 +98,8 @@ def display_system_stats(sysdata):
     print(f"Disk Available: {sysdata['disk_available']:.2f}/{sysdata['disk_total']:.2f} GB")
     #print(f"Network Data: {sysdata['network']}")
     print(f"Uptime: {sysdata['uptime']}")
+
+    print(f"HDD 1 Available: {sysdata['mntdisk_available']:.2f}/{sysdata['mntdisk_total']:.2f} GB")
     
 
 
