@@ -5,6 +5,7 @@ import subprocess
 import psutil
 import time
 from datetime import timedelta
+import json
 
 # global variables
 
@@ -80,7 +81,7 @@ def collect_sysdata():
         "disk_percent": diskuse,
         "disk_available": diskavgb,
         "disk_total": disktotgb,
-        "network": networkdat,
+        #"network": networkdat,
         "uptime": uptime,
         "mntdisk_available": diskavmnt1gb,
         "mntdisk_total": disktotmnt1gb
@@ -163,7 +164,17 @@ def vpn_ip():
     print(f"public_ip: {public_ip}")
     print(f"mullvad_ip: {mullvad_ip}")
 
-    return(public_ip,mullvad_ip)
+    return{
+        "public_ip": public_ip,
+        "mullvad_ip": mullvad_ip,
+        "vpn_active": mullvad_ip != "" and mullvad_ip != public_ip
+    }
+    
+
+
+
+
+#def docker_overview():
 
 
 
@@ -174,12 +185,17 @@ def vpn_ip():
 
 
 
+#the status_update json must be the final function
 
+def status_update(sysdata, vpn_data):
 
+    status_data = {
+        "system": sysdata,
+        "vpn_data": vpn_data
+    }
 
-
-
-
+    with open("status_database.json", "w") as file:
+        json.dump(status_data, file, indent=4)
 
 
 
@@ -190,4 +206,5 @@ print_title()
 display_system_stats(sysdata)
 
 print(check_vpn_status().stdout)
-vpn_ip()
+vpn_data = vpn_ip()
+status_update(sysdata, vpn_data)
