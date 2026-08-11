@@ -127,6 +127,7 @@ def check_vpn_status():
     print("VPN Status (Torrent)")
     print("--------------------")
     print("                    ")
+    
     vpn_status = subprocess.run(["docker", "ps", "--filter", "name=qbittorrent-vpn", "--format", "VPN Status: {{.Status}}"],
     capture_output=True,
     text=True)
