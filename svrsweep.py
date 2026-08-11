@@ -43,10 +43,24 @@ def collect_sysdata():
     disktot = psutil.disk_usage("/").total
     networkdat = psutil.net_io_counters()
 
-    diskavmnt1 = psutil.disk_usage("/mnt/storage").free
-    disktotmnt1 = psutil.disk_usage("/mnt/storage").total
+    try:
+        diskavmnt1 = psutil.disk_usage("/mnt/storage").free
+        diskavmnt1gb = diskavmnt1 / 1000**3
+    except:
+        diskavmnt1gb = None
+
+
+
+    try:
+        disktotmnt1 = psutil.disk_usage("/mnt/storage").total
+        disktotmnt1gb = disktotmnt1 / 1000**3
+    except:
+        disktotmnt1gb = None
+
+
+
     
-    #temp = sensors_temperatures()
+    
 
     ramgb = ramavail / 1024**3
     ramtotgb = ramtot / 1024**3
@@ -54,8 +68,7 @@ def collect_sysdata():
     diskavgb = diskav / 1000**3
     disktotgb = disktot /1000**3
 
-    diskavmnt1gb = diskavmnt1 / 1000**3
-    disktotmnt1gb = disktotmnt1 / 1000**3
+   
 
 
     return {
@@ -99,7 +112,11 @@ def display_system_stats(sysdata):
     #print(f"Network Data: {sysdata['network']}")
     print(f"Uptime: {sysdata['uptime']}")
 
-    print(f"HDD 1 Available: {sysdata['mntdisk_available']:.2f}/{sysdata['mntdisk_total']:.2f} GB")
+    if sysdata['mntdisk_available'] is None:
+        print("HDD 1 Not Mounted")
+    else:
+        print(f"HDD1: Available: {sysdata['mntdisk_available']:.2f}/{sysdata['mntdisk_total']:.2f} GB")
+
     
 
 
