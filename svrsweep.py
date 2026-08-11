@@ -83,8 +83,8 @@ def collect_sysdata():
         "disk_total": disktotgb,
         #"network": networkdat,
         "uptime": uptime,
-        "mntdisk_available": diskavmnt1gb,
-        "mntdisk_total": disktotmnt1gb
+        "mntdisk1_available": diskavmnt1gb,
+        "mntdisk1_total": disktotmnt1gb
     }
 
 
@@ -101,7 +101,7 @@ def print_title():
 def display_system_stats(sysdata):
 
     print("\n------------------")
-    print("System information")
+    print("System Status")
     print("------------------")
     print("")
 
@@ -109,15 +109,17 @@ def display_system_stats(sysdata):
     print(f"CPU Cores: {sysdata['cpu_cores']}")
     print(f"RAM Usage: {sysdata['ram_percent']:.2f} %")
     print(f"RAM Available: {sysdata['ram_available']:.2f}/{sysdata['ram_total']:.2f} GB")
-    print(f"Disk Usage: {sysdata['disk_percent']:.2f} %")
-    print(f"Local Disk Available: {sysdata['disk_available']:.2f}/{sysdata['disk_total']:.2f} GB")
+    print(f"Local Disk Usage: {sysdata['disk_percent']:.2f} %")
+    print(f"Server Uptime: {sysdata['uptime']}")
+    #print(f"Local Disk Available: {sysdata['disk_available']:.2f}/{sysdata['disk_total']:.2f} GB")
     #print(f"Network Data: {sysdata['network']}")
-    print(f"Uptime: {sysdata['uptime']}")
-
-    if sysdata['mntdisk_available'] is None:
+    
+    print("")
+    print(f"Local Disk Available: {sysdata['disk_available']:.2f}/{sysdata['disk_total']:.2f} GB")
+    if sysdata['mntdisk1_available'] is None:
         print("HDD 1 Not Mounted")
     else:
-        print(f"HDD1: Available: {sysdata['mntdisk_available']:.2f}/{sysdata['mntdisk_total']:.2f} GB")
+        print(f"HDD1: Available: {sysdata['mntdisk1_available']:.2f}/{sysdata['mntdisk1_total']:.2f} GB")
 
     
 
@@ -176,6 +178,13 @@ def vpn_ip():
 
 
 
+
+
+
+
+
+
+
 def docker_overview():
     print("")
     print("-------------")
@@ -186,9 +195,9 @@ def docker_overview():
 
 def pihole_overview():
     print("")
-    print("-------------")
+    print("----------------")
     print("Adblocker Status")
-    print("-------------")
+    print("----------------")
     print("")
 
 
@@ -220,6 +229,10 @@ display_system_stats(sysdata)
 
 print(check_vpn_status().stdout)
 vpn_data = vpn_ip()
+
+
+pihole_overview = pihole_overview()
+
 
 
 docker_overview = docker_overview()
