@@ -1,0 +1,20 @@
+{
+    "system": {
+        "cpu": 6.2,
+        "cpu_cores": 8,
+        "ram_percent": 12.7,
+        "ram_available": 27.029769897460938,
+        "ram_total": 30.97530746459961,
+        "disk_percent": 2.3,
+        "disk_available": 910.588977152,
+        "disk_total": 982.240026624,
+        "uptime": "0d 2h 70m 10s",
+        "mntdisk_available": null,
+        "mntdisk_total": null
+    },
+    "vpn_data": {
+        "public_ip": "82.15.196.210",
+        "mullvad_ip": "",
+        "vpn_active": false
+    }
+}
