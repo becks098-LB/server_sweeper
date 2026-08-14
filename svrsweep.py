@@ -199,6 +199,14 @@ def pihole_overview():
     print("Adblocker Status")
     print("----------------")
     print("")
+    pihole_status = subprocess.run(["docker", "ps", "-a", "--filter", "name=pihole","--format", "{{.Status}}"],
+    capture_output=True,
+    text=True)
+
+    pihole_status = pihole_status.stdout.strip()
+
+    return (pihole_status)
+
 
 
 
@@ -230,8 +238,8 @@ display_system_stats(sysdata)
 print(check_vpn_status().stdout)
 vpn_data = vpn_ip()
 
-
-pihole_overview = pihole_overview()
+#pihole_overview = pihole_overview()
+print(pihole_overview())
 
 
 
