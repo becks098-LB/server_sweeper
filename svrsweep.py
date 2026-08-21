@@ -215,7 +215,7 @@ def docker_overview():
     print("---------------------------------")
     print("")
 
-    docker_status = subprocess.run(["docker", "ps", "--format", "{{.Names}}"],
+    docker_status = subprocess.run(["docker", "ps", "--format", "{{.Names}} - {{.Status}}"],
     capture_output=True,
     text=True)
 
