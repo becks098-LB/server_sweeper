@@ -208,7 +208,20 @@ def pihole_overview():
     return (pihole_status)
 
 
+def docker_overview():
+    print("")
+    print("---------------------------------")
+    print("Docker Status (Active Containers)")
+    print("---------------------------------")
+    print("")
 
+    docker_status = subprocess.run(["docker", "ps", "--format", "{{.Names}}"],
+    capture_output=True,
+    text=True)
+
+    docker_status = docker_status.stdout.strip()
+
+    return (docker_status)
 
 
 
@@ -243,7 +256,8 @@ print(pihole_overview())
 
 
 
-docker_overview = docker_overview()
+#docker_overview = docker_overview()
+print(docker_overview())
 
 
 
